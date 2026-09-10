@@ -18,5 +18,6 @@
 | `dat-hook/MartopiaWinmm.vcxproj` | 主 DLL 的 Visual C++ 工程。 |
 | `dat-hook/ResourcePatchTests.vcxproj` | 替换逻辑测试工程。 |
 | `dat-hook/build_winmm.ps1` | 构建 WinMM 代理 DLL。 |
+| `dat-hook/third/detours/` | 项目自带的 Microsoft Detours x86 依赖，无需额外准备外部 Hook 工程。 |
 | `dat-hook/start_parallel_dump.ps1` | 启动并行资源导出流程。 |
 | `MartopiaWinmm-原说明.md` | 运行时工具的详细使用说明。 |

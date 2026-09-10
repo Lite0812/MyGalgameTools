@@ -1,6 +1,6 @@
 # Martopia 资源覆盖与运行时解包代理
 
-这是基于 CialloHook 的 x86 `winmm.dll` 代理，完整转发 winmm 导出表，并在
+这是使用 Microsoft Detours 的独立 x86 `winmm.dll` 代理，完整转发 winmm 导出表，并在
 `DllMain` 返回后启动初始化线程。代理可以按 INI 配置只做资源覆盖，也可以挂接
 游戏的归档读取、解密和资源登记函数，抓取引擎实际解码后的文件内容。
 
