@@ -1,20 +1,5 @@
 #include <Windows.h>
 #include "version_proxy.h"
-#include "../CialloHook/src/CialloHook/config/build_options.h"
-
-#ifndef CIALLOHOOK_PROTECT_VERSION_PROXY
-#define CIALLOHOOK_PROTECT_VERSION_PROXY 1
-#endif
-
-#if defined(_MSC_VER) && defined(_WIN32) && CIALLOHOOK_FEATURE_CODECRYPT_PATCH && CIALLOHOOK_PROTECT_VERSION_PROXY
-#define CIALLOHOOK_VERSION_PROXY_PROTECTED_BEGIN __pragma(code_seg(push, ".lpksc$m"))
-#define CIALLOHOOK_VERSION_PROXY_PROTECTED_END __pragma(code_seg(pop))
-#else
-#define CIALLOHOOK_VERSION_PROXY_PROTECTED_BEGIN
-#define CIALLOHOOK_VERSION_PROXY_PROTECTED_END
-#endif
-
-CIALLOHOOK_VERSION_PROXY_PROTECTED_BEGIN
 
 static void VersionProxyOutput(const wchar_t* text)
 {
@@ -80,18 +65,18 @@ static BOOL CALLBACK InitVersionProxy(PINIT_ONCE, PVOID, PVOID*)
 	if (systemDirectoryLength == 0 || systemDirectoryLength >= _countof(realDllPath) ||
 		wcscat_s(realDllPath, L"\\version.dll") != 0)
 	{
-		VersionProxyOutput(L"[Ciallo Runtime] invalid system version.dll path\r\n");
+		VersionProxyOutput(L"[Martopia Runtime] invalid system version.dll path\r\n");
 		return FALSE;
 	}
 
-	VersionProxyOutput(L"[Ciallo Runtime] component init begin\r\n");
+	VersionProxyOutput(L"[Martopia Runtime] component init begin\r\n");
 	if (g_realVersion == nullptr)
 	{
 		g_realVersion = LoadLibraryW(realDllPath);
 	}
 	if (g_realVersion == nullptr)
 	{
-		VersionProxyOutput(L"[Ciallo Runtime] failed to load system version.dll\r\n");
+		VersionProxyOutput(L"[Martopia Runtime] failed to load system version.dll\r\n");
 		return FALSE;
 	}
 
@@ -151,11 +136,11 @@ static BOOL CALLBACK InitVersionProxy(PINIT_ONCE, PVOID, PVOID*)
 		!VersionProxy::OriginalVerQueryValueA ||
 		!VersionProxy::OriginalVerQueryValueW)
 	{
-		VersionProxyOutput(L"[Ciallo Runtime] required version.dll export is missing\r\n");
+		VersionProxyOutput(L"[Martopia Runtime] required version.dll export is missing\r\n");
 		return FALSE;
 	}
 
-	VersionProxyOutput(L"[Ciallo Runtime] component init success\r\n");
+	VersionProxyOutput(L"[Martopia Runtime] component init success\r\n");
 	return TRUE;
 }
 

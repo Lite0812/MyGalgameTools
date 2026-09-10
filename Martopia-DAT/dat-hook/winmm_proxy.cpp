@@ -1,16 +1,5 @@
 #include <Windows.h>
 #include <mmsystem.h>
-#include "../CialloHook/src/CialloHook/config/build_options.h"
-
-#if defined(_MSC_VER) && defined(_WIN32) && CIALLOHOOK_FEATURE_CODECRYPT_PATCH
-#define CIALLOHOOK_WINMM_PROTECTED_BEGIN __pragma(code_seg(push, ".lpksc$m"))
-#define CIALLOHOOK_WINMM_PROTECTED_END __pragma(code_seg(pop))
-#else
-#define CIALLOHOOK_WINMM_PROTECTED_BEGIN
-#define CIALLOHOOK_WINMM_PROTECTED_END
-#endif
-
-CIALLOHOOK_WINMM_PROTECTED_BEGIN
 
 #ifndef _WIN64
 using Fn_mciGetErrorStringA = decltype(&mciGetErrorStringA);
@@ -459,7 +448,7 @@ static bool EnsureRealWinmm()
 	return InitOnceExecuteOnce(&g_winmmInitOnce, InitRealWinmm, nullptr, nullptr) != FALSE && g_realWinmm != nullptr;
 }
 
-extern "C" bool CialloHook_EnsureRealWinmm()
+extern "C" bool Martopia_EnsureRealWinmm()
 {
 	return EnsureRealWinmm();
 }
@@ -891,8 +880,6 @@ extern "C" MMRESULT WINAPI CialloWinMM_waveOutWrite(HWAVEOUT hwo, LPWAVEHDR pwh,
 }
 #endif
 
-CIALLOHOOK_WINMM_PROTECTED_END
-
 #ifdef _WIN64
 static INIT_ONCE g_winmmInitOnce = INIT_ONCE_STATIC_INIT;
 static HMODULE g_realWinmm = nullptr;
@@ -922,12 +909,12 @@ static bool EnsureRealWinmm()
 	return InitOnceExecuteOnce(&g_winmmInitOnce, InitRealWinmm, nullptr, nullptr) != FALSE && g_realWinmm != nullptr;
 }
 
-extern "C" bool CialloHook_EnsureRealWinmm()
+extern "C" bool Martopia_EnsureRealWinmm()
 {
 	return EnsureRealWinmm();
 }
 
-extern "C" FARPROC CialloHook_ResolveWinmmX64(UINT ordinal)
+extern "C" FARPROC Martopia_ResolveWinmmX64(UINT ordinal)
 {
 	if (ordinal < 2 || ordinal >= _countof(g_cialloWinmmX64Targets))
 	{
