@@ -1,0 +1,20 @@
+LIBRARY "version.dll"
+EXPORTS
+    DetourFinishHelperProcess @1 NONAME
+    GetFileVersionInfoA=ProxyGetFileVersionInfoA
+    GetFileVersionInfoByHandle=ProxyGetFileVersionInfoByHandle
+    GetFileVersionInfoExA=ProxyGetFileVersionInfoExA
+    GetFileVersionInfoExW=ProxyGetFileVersionInfoExW
+    GetFileVersionInfoSizeA=ProxyGetFileVersionInfoSizeA
+    GetFileVersionInfoSizeExA=ProxyGetFileVersionInfoSizeExA
+    GetFileVersionInfoSizeExW=ProxyGetFileVersionInfoSizeExW
+    GetFileVersionInfoSizeW=ProxyGetFileVersionInfoSizeW
+    GetFileVersionInfoW=ProxyGetFileVersionInfoW
+    VerFindFileA=ProxyVerFindFileA
+    VerFindFileW=ProxyVerFindFileW
+    VerInstallFileA=ProxyVerInstallFileA
+    VerInstallFileW=ProxyVerInstallFileW
+    VerLanguageNameA=ProxyVerLanguageNameA
+    VerLanguageNameW=ProxyVerLanguageNameW
+    VerQueryValueA=ProxyVerQueryValueA
+    VerQueryValueW=ProxyVerQueryValueW
